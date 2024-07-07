@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-
+import styles from "./Weather.module.css";
 import { IoIosSearch } from "react-icons/io";
 
 const Weather = () => {
@@ -84,43 +84,47 @@ const Weather = () => {
 
   return (
     <>
-      <div className="search-box">
-        <input
-          type="text"
-          value={query}
-          placeholder="Search"
-          onChange={(e) => setQuery(e.target.value)}
-          onKeyPress={handlePress}
-        />
-        <IoIosSearch
-          onClick={handleClick}
-          aria-label="Search"
-          role="button"
-          tabIndex={0}
-        />
-      </div>
-      {loading ? (
-        <div>Loading...</div>
-      ) : error ? (
-        <div>Error: {error}</div>
-      ) : (
-        typeof weather.main !== "undefined" && (
-          <div>
-            <div className="location-box">
-              <div>
-                {weather.name}, {weather.sys.country}
+      <div className={styles.weather}>
+        <div className={styles.search_box}>
+          <input
+            type="text"
+            value={query}
+            placeholder="Search"
+            onChange={(e) => setQuery(e.target.value)}
+            onKeyPress={handlePress}
+          />
+          <IoIosSearch
+            onClick={handleClick}
+            aria-label="Search"
+            role="button"
+            tabIndex={0}
+          />
+        </div>
+        {loading ? (
+          <div>Loading...</div>
+        ) : error ? (
+          <div>Error: {error}</div>
+        ) : (
+          typeof weather.main !== "undefined" && (
+            <div>
+              <div className="location-box">
+                <p className={styles.location}>
+                  {weather.name}, {weather.sys.country}
+                </p>
+                <div>{dateBuilder(new Date())}</div>
               </div>
-              <div>{dateBuilder(new Date())}</div>
+              <div className="temperature-box">
+                <p className={styles.temperature}>
+                  {Math.round(weather.main.temp)}°C
+                </p>
+              </div>
+              <div className="weather">
+                <p>{weather.weather[0].main}</p>
+              </div>
             </div>
-            <div className="temperature-box">
-              <p>{Math.round(weather.main.temp)}°C</p>
-            </div>
-            <div className="weather">
-              <p>{weather.weather[0].main}</p>
-            </div>
-          </div>
-        )
-      )}
+          )
+        )}
+      </div>
     </>
   );
 };
