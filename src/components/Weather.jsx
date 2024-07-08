@@ -143,7 +143,7 @@ const Weather = () => {
             <div className={styles.weather_content}>
               <p>{dateBuilder(new Date())}</p>
 
-              <img src={`/src/assets/${conditions}.png`} alt="" />
+              <img src={`/assets/${conditions}.png`} alt="" />
 
               <p className={styles.weather_conditions}>
                 {weather.weather[0].main}
