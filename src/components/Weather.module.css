@@ -5,6 +5,27 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  border-radius: 10px;
+}
+
+.weather_content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 30px;
+}
+.weather_content > p {
+  font-size: 18px;
+  color: #fff;
+}
+
+.weather_conditions {
+  font-size: 18px;
+  color: #fff;
+}
+
+.location_box {
+  text-align: center;
 }
 
 .search_box {
@@ -38,14 +59,36 @@
 
 .temperature {
   color: #fff;
-  font-size: 80px;
+  font-size: 65px;
   line-height: 1;
 }
 
 .location {
   color: #fff;
-  font-size: 40px;
+  font-size: 30px;
 }
 
 .weather_data {
+  width: 100%;
+  margin-top: 40px;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+}
+
+.weather_data col {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 22px;
+}
+
+.weather_data col span {
+  display: block;
+  font-size: 16px;
+}
+
+.weather_data col img {
+  width: 26px;
+  margin-top: 10px;
 }

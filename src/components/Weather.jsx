@@ -1,13 +1,39 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import styles from "./Weather.module.css";
 import { IoIosSearch } from "react-icons/io";
+// import { conditions } from "../assets/cloud.png";
+import clearicon from "../assets/clear.png";
 
 const Weather = () => {
   const [query, setQuery] = useState("");
   const [weather, setWeather] = useState({});
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+
+  // const cond = ["Clear", "Drizzle", "Clouds", "Haze", "Rain", "Snow"];
+
+  const [conditions, setCondition] = useState("");
+
+  useEffect(() => {
+    {
+      if (typeof weather.main !== "undefined") {
+        if (weather.weather[0].main === "Clouds") {
+          setCondition("cloud");
+        } else if (weather.weather[0].main === "Rain") {
+          setCondition("rain");
+        } else if (weather.weather[0].main === "Haze") {
+          setCondition("haze");
+        } else if (weather.weather[0].main === "Drizzle") {
+          setCondition("drizzle");
+        } else if (weather.weather[0].main === "Snow") {
+          setCondition("snow");
+        } else if (weather.weather[0].main === "Clear") {
+          setCondition("clear");
+        }
+      }
+    }
+  });
 
   const api = {
     key: "fd99ed79aaca0f833876596b62ad8dd0",
@@ -27,6 +53,7 @@ const Weather = () => {
       })
       .then((result) => {
         setWeather(result);
+        console.log(result);
         setQuery("");
       })
       .catch((error) => {
@@ -106,20 +133,23 @@ const Weather = () => {
           <div>Error: {error}</div>
         ) : (
           typeof weather.main !== "undefined" && (
-            <div>
-              <div className="location-box">
+            <div className={styles.weather_content}>
+              <p>{dateBuilder(new Date())}</p>
+
+              <img src={`/src/assets/${conditions}.png`} alt="" />
+
+              <p className={styles.weather_conditions}>
+                {weather.weather[0].main}
+              </p>
+              <div className={styles.location_box}>
                 <p className={styles.location}>
                   {weather.name}, {weather.sys.country}
                 </p>
-                <div>{dateBuilder(new Date())}</div>
               </div>
               <div className="temperature-box">
                 <p className={styles.temperature}>
                   {Math.round(weather.main.temp)}°C
                 </p>
-              </div>
-              <div className="weather">
-                <p>{weather.weather[0].main}</p>
               </div>
             </div>
           )
