@@ -1,9 +1,7 @@
-import React, { useEffect } from "react";
+import { React, useEffect } from "react";
 import { useState } from "react";
 import styles from "./Weather.module.css";
 import { IoIosSearch } from "react-icons/io";
-// import { conditions } from "../assets/cloud.png";
-import clearicon from "../assets/clear.png";
 
 const Weather = () => {
   const [query, setQuery] = useState("");
@@ -11,9 +9,12 @@ const Weather = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  // const cond = ["Clear", "Drizzle", "Clouds", "Haze", "Rain", "Snow"];
-
   const [conditions, setCondition] = useState("");
+  const cities = ["Karwar", "Panaji", "Pune", "Delhi", "Bangalore"];
+
+  useEffect(() => {
+    fetchWeather();
+  }, []);
 
   useEffect(() => {
     {
@@ -30,6 +31,8 @@ const Weather = () => {
           setCondition("snow");
         } else if (weather.weather[0].main === "Clear") {
           setCondition("clear");
+        } else if (weather.weather[0].main === "Mist") {
+          setCondition("mist");
         }
       }
     }
@@ -44,16 +47,22 @@ const Weather = () => {
     setLoading(true);
     setError(null);
 
-    fetch(`${api.basename}weather?q=${query}&units=metric&appid=${api.key}`)
+    let randomIndex = Math.floor(Math.random() * cities.length);
+    let randomCity = cities[randomIndex];
+
+    const fetchQuery = query === "" ? randomCity : query;
+
+    fetch(
+      `${api.basename}weather?q=${fetchQuery}&units=metric&appid=${api.key}`
+    )
       .then((res) => {
         if (!res.ok) {
-          throw new Error("Network response was not ok");
+          throw new Error("No data found");
         }
         return res.json();
       })
       .then((result) => {
         setWeather(result);
-        console.log(result);
         setQuery("");
       })
       .catch((error) => {
@@ -63,6 +72,7 @@ const Weather = () => {
         setLoading(false);
       });
   };
+  // fetchWeather();
 
   const handleClick = () => {
     if (query) {
@@ -120,17 +130,14 @@ const Weather = () => {
             onChange={(e) => setQuery(e.target.value)}
             onKeyPress={handlePress}
           />
-          <IoIosSearch
-            onClick={handleClick}
-            aria-label="Search"
-            role="button"
-            tabIndex={0}
-          />
+          <span onClick={handleClick}>
+            <IoIosSearch aria-label="Search" role="button" tabIndex={0} />
+          </span>
         </div>
         {loading ? (
-          <div>Loading...</div>
+          <div className={styles.error_msg}>Loading...</div>
         ) : error ? (
-          <div>Error: {error}</div>
+          <div className={styles.error_msg}>No data found</div>
         ) : (
           typeof weather.main !== "undefined" && (
             <div className={styles.weather_content}>
