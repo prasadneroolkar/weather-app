@@ -9,6 +9,7 @@
   /* max-width: 360px; */
   min-height: 400px;
   /* margin: 0 auto; */
+  width: 100%;
 }
 @media only screen and (max-width: 600px) {
   .weather {
@@ -41,7 +42,7 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  max-width: 320px;
+  width: 100%;
   margin: 0 auto;
 }
 
@@ -58,7 +59,7 @@
 
 @media only screen and (max-width: 600px) {
   .search_box input {
-    max-width: 320px;
+    width: 100%;
   }
 }
 
