@@ -56,6 +56,12 @@
   font-size: 18px;
 }
 
+@media only screen and (max-width: 375px) {
+  .search_box input {
+    max-width: 320px;
+  }
+}
+
 .search_box span {
   align-items: center;
   display: flex;
