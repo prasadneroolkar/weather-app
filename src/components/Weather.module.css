@@ -8,11 +8,12 @@
   border-radius: 10px;
   /* max-width: 360px; */
   min-height: 400px;
-  margin: 0 auto;
+  /* margin: 0 auto; */
 }
 @media only screen and (max-width: 600px) {
   .weather {
     /* max-width: unset; */
+    padding: 20px;
   }
 }
 
@@ -40,6 +41,8 @@
   display: flex;
   align-items: center;
   gap: 12px;
+  max-width: 320px;
+  margin: 0 auto;
 }
 
 .search_box input {
