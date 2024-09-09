@@ -7,8 +7,19 @@
   font-family: "Poppins", sans-serif;
 }
 
-.app {
-  min-height: 100vh;
-  display: grid;
+html,
+body {
+  height: 100%;
+  overflow-x: hidden;
+}
+
+.body {
   background-color: #e2d4ff;
+}
+
+.app {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }

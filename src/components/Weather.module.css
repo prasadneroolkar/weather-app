@@ -8,10 +8,11 @@
   border-radius: 10px;
   max-width: 360px;
   min-height: 400px;
+  margin: 0 auto;
 }
 @media only screen and (max-width: 600px) {
   .weather {
-    max-width: unset;
+    /* max-width: unset; */
   }
 }
 
