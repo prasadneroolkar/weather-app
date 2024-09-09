@@ -56,7 +56,7 @@
   font-size: 18px;
 }
 
-@media only screen and (max-width: 375px) {
+@media only screen and (max-width: 600px) {
   .search_box input {
     max-width: 320px;
   }
